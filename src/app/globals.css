@@ -1,0 +1,669 @@
+/* ==========================================================================
+   1. Tokens de cor e tipografia
+   ========================================================================== */
+:root {
+  --background: #1a1d21;
+  --foreground: #e6edf3;
+  --card: #212529;
+  --card-hover: #2c3136;
+  --menu-bg: #1a1d21;
+  --border: #343a40;
+  --input-bg: #1a1d21;
+  --input-border: #495057;
+  --text-muted: #adb5bd;
+  --text-subtle: #6c757d;
+  --primary: #00c4cc;
+  --primary-dark: #009aa1;
+  --success: #11a286;
+  --danger: #ee5268;
+  --warning: #fccb62;
+
+  /* Raios reduzidos (menos arredondado) */
+  --radius-lg: 6px;
+  --radius-md: 4px;
+
+  --font-sans: var(--font-inter), "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Inputs com bordas e foco discretos */
+input,
+select,
+textarea {
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 196, 204, 0.15);
+}
+
+select option {
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   3. Casca do dashboard
+   ========================================================================== */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-rows: 72px minmax(0, 1fr);
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  gap: 16px;
+  height: 100vh;
+  padding: 16px;
+  background: var(--background);
+}
+
+/* ==========================================================================
+   4. Header
+   ========================================================================== */
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  min-width: 0;
+}
+
+.dashboard-header__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.search-box-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 480px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--input-bg);
+  color: var(--text-muted);
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--foreground);
+  font-size: 13px;
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.header-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  position: relative;
+  display: inline-flex;
+  font-size: 18px;
+  color: var(--foreground);
+}
+
+.header-icon__badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+/* ==========================================================================
+   5. Sidebar
+   ========================================================================== */
+.sidebar {
+  grid-area: sidebar;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
+  color: var(--sidebar-text);
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 16px;
+}
+
+.sidebar__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--sidebar-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sidebar__brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sidebar__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.sidebar__email {
+  font-size: 11px;
+  color: var(--text-subtle);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__nav {
+  flex: 1;
+}
+
+.sidebar__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar__item {
+  position: relative;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  color: var(--sidebar-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sidebar__link:hover {
+  color: var(--sidebar-active);
+  background: var(--card-hover);
+}
+
+.sidebar__link--active {
+  color: var(--sidebar-active);
+  background: var(--input-bg);
+}
+
+.sidebar__badge {
+  margin-left: auto;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #1c262b;
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.sidebar__footer {
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   6. Área de conteúdo
+   ========================================================================== */
+.menu {
+  grid-area: main;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  min-width: 0;
+  padding: 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.page-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.page-header__info h1 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+.page-header__info p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   7. Botões
+   ========================================================================== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--card-hover);
+}
+
+.button--primary {
+  background: var(--input-bg);
+  color: var(--foreground);
+}
+
+.button--cyan {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.button--cyan:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.button--secondary {
+  background: var(--input-bg);
+  color: var(--text-muted);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   8. Estados e mensagens
+   ========================================================================== */
+.empty-state {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.form-error {
+  padding: 10px 12px;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+  background: rgba(238, 82, 104, 0.12);
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.form-success {
+  color: var(--success);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   9. Página inicial (fora do dashboard)
+   ========================================================================== */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.landing h1 {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.landing p {
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   10. Responsividade
+   ========================================================================== */
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "header"
+      "main";
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .header {
+    height: auto;
+    padding: 12px 4px;
+  }
+
+  .dashboard-header__actions {
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    max-width: none;
+  }
+
+  .menu {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-layout {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .menu {
+    padding: 16px;
+  }
+
+  .page-header__info h1 {
+    font-size: 20px;
+  }
+
+  .landing h1 {
+    font-size: 30px;
+  }
+}
+
+/* ==========================================================================
+   11. Grid de projetos
+   ========================================================================== */
+.projeto-grid,
+.projetos-grid,
+.page-content__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   12. Ajustes de formulário
+   ========================================================================== */
+form input:not([type="checkbox"]):not([type="radio"]),
+form textarea,
+form select {
+  width: 100% !important;
+  padding: 10px 14px;
+}
+
+.page-content-box {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.button--primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #0e1116;
+  font-weight: 700;
+}
+
+.button--primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.button--secondary {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.button--secondary:hover {
+  background-color: var(--card-hover);
+  color: var(--foreground);
+}
+
+/* Tabelas */
+.table-container {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+}
+
+.table-standard {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-standard th {
+  padding: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.table-standard td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 14px;
+}
+
+.table-standard tr:last-child td {
+  border-bottom: none;
+}
+
+.table-standard tr:hover td {
+  background-color: var(--card-hover);
+}
+
+/* ==========================================================================
+   13. Scrollbars discretas
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d333b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444c56;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2d333b transparent;
+}
+
+.kanban-board-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.kanban-board-container::-webkit-scrollbar {
+  display: none;
+}
