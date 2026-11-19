@@ -46,4 +46,8 @@ pnpm-debug.log*
 # 6. Arquivos do Sistema Operacional e Temporários
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 *.tmp
+=======
+*.tmp
+>>>>>>> fcbd670ea7081e6453252f74f22830f0e4655b28
