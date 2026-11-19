@@ -46,6 +46,9 @@ app.put('/admin/ongs/:email', requireAuth, requireAdmin, editarOng);
 app.delete('/admin/ongs/:email', requireAuth, requireAdmin, excluirOng);
 app.put('/admin/ongs/:email/redefinir-senha', requireAuth, requireAdmin, redefinirSenhaOng);
 
-app.listen(env.PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${env.PORT}`);
-});
+//Atualização Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(env.PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${env.PORT}`);
+  });
+}
